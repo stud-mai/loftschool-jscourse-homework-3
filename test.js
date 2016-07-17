@@ -1,4 +1,5 @@
 let methods = require('./arrays_methods.js');
+let deepEqual = require('./deep_equal.js');
 
 let array = [1, 2, 3, 4, 5, 6];
 
@@ -48,3 +49,44 @@ console.log(myFish);
 console.log(removed);
 // myFish is ['parrot', 'anemone', 'surgeon']
 // removed is ['blue', 'trumpet']
+
+//Проверка сравнения объектов
+var objA = {
+    prop1: 'value1',
+    prop2: 'value2',
+    prop3: 'value3',
+    prop4: {
+        subProp1: 'sub value1',
+        subProp2: {
+            subSubProp1: 'sub sub value1',
+            subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5]
+        }
+    },
+    prop5: 1000,
+    prop6: new Date(2016, 2, 10),
+	prop: function(){
+		for(var i in this){
+			console.log(this[i])
+		}
+	}
+};
+
+var objB = {
+    prop5: 1000,
+    prop3: 'value3',
+    prop1: 'value1',
+    prop2: 'value2',
+    prop6: new Date('2016/03/10'),
+    prop4: {
+        subProp2: {
+            subSubProp1: 'sub sub value1',
+            subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5]
+        },
+        subProp1: 'sub value1'
+    },
+	prop: function(){
+		console.log(this[i])		
+	}
+};
+
+console.log(deepEqual(objA, objB)? 'Объекты идентичны!' : 'Объекты разные!');
